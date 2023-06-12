@@ -1,10 +1,14 @@
+import json
 
-def read_json():
+
+def read_json(file_path):
     '''
     читает файл json
     :return: данные в виде списка словарей
     '''
-    pass
+    with open(file_path, encoding='utf-8') as f:
+        data = json.load(f)
+    return data
 
 def sort_data(data):
     '''
