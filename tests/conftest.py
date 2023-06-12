@@ -136,8 +136,7 @@ def data_for_sort():
     ]
 @pytest.fixture
 def expected_result_for_sort():
-    return [
-      {
+    return [{
         "id": 441945886,
         "state": "EXECUTED",
         "date": "2019-08-26T10:50:58.294041",
@@ -152,3 +151,4 @@ def expected_result_for_sort():
         "from": "Maestro 1596837868705199",
         "to": "Счет 64686473678894779589"
       }]
+
