@@ -1,9 +1,9 @@
 import functions
 
 
-data_list = func.get_input_data('../operations.json')
+data_list = functions.read_json('../operations.json')
 
-operations = func.get_executed_operations(data_list)
+operations = functions.sort_data(data_list)
 
 for operation in operations:
-    print(func.get_message(operation))
+    print(functions.get_message(operation))
