@@ -1,24 +1,33 @@
 import json
 
+def get_input_data(file_name):
+    """
+    :param file_name: Название json-файла с исходными данными
+    :return: данные json-файла в виде списка словарей
+    """
+    with open(file_name, 'r', encoding='utf-8') as f:
+        input_data = json.load(f)
+    return input_data
 
-def read_json(file_path):
-    '''
-    читает файл json
-    :return: данные в виде списка словарей
-    '''
-    with open(file_path, encoding='utf-8') as f:
-        data = json.load(f)
-    return data
+def get_executed_operations(operation_list):
+    """
+    Функция определяет статуст перевода
+    :param operation_list: Список со словарями с данными по операциям
+    :return: Список из 5 успешных операций
+    """
+    executed_operations = []
+    for operation in operation_list:
+        if 'state' in operation.keys():
+            if operation['state'] == 'EXECUTED':
+                date = operation.get('date')
+                formatted_date = date[:10]
+                executed_operations.append((formatted_date, operation))
+            else:
+                continue
 
-def sort_data(data: list[dict]) -> list[dict]:
-    '''
-    сортирует даннные по статусу операции
-    :param data: исходные даннные
-    :return: отсортированные данные
-    '''
-    sorted_data = [operation for operation in data if operation['state'] == 'EXECUTED']
-
-    return sorted_data
+    sorted_operations = sorted(executed_operations, key=lambda x: x[0], reverse=True)
+    last_five_operations = [operation[1] for operation in sorted_operations[:5]]
+    return last_five_operations
 
 
 def format_from_account(input_from_account):
